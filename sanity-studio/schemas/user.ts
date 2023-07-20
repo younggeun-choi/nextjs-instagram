@@ -90,7 +90,7 @@ export default {
     {
       name: 'avatarimg',
       title: 'AvatarImg',
-      type: 'image',
+      type: 'string',
     },
     {
       name: 'following',
@@ -129,4 +129,10 @@ export default {
       validation: (Rule: any) => Rule.unique(),
     },
   ],
+  preview: {
+    select: {
+      title: 'username',
+      subtitle: 'name',
+    },
+  },
 }

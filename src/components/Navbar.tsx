@@ -11,6 +11,7 @@ import {
 } from "./ui/icons";
 import { usePathname } from "next/navigation";
 import ColorButton from "./ui/ColorButton";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const menu = [
   {
@@ -32,6 +33,7 @@ const menu = [
 
 export default function Navbar() {
   const pathName = usePathname();
+  const { data: session } = useSession();
 
   return (
     <div className="flex justify-between items-center m-6">
@@ -45,7 +47,11 @@ export default function Navbar() {
               <Link href={href}>{pathName === href ? clickedIcon : icon}</Link>
             </li>
           ))}
-          <ColorButton text="Log in" onClick={() => {}} />
+          {session ? (
+            <ColorButton text="Log out" onClick={() => signOut()} />
+          ) : (
+            <ColorButton text="Log in" onClick={() => signIn()} />
+          )}
         </ul>
       </nav>
     </div>

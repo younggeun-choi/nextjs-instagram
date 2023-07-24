@@ -20,7 +20,7 @@ export default async function SigninPage({
 
   const providers = (await getProviders()) ?? {};
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen py-2">
+    <section className="flex flex-col items-center justify-center mt-24">
       <Signin providers={providers} callbackUrl={callbackUrl ?? "/"} />
     </section>
   );

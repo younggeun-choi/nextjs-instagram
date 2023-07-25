@@ -25,3 +25,13 @@ export async function addUser({ id, name, email, username, image }: OAuthUser) {
       console.log(`${username} was created (or was already present)`);
     });
 }
+
+export async function getUserByUsername(username: string) {
+  return client.fetch(`*[_type == "user" && username == "${username}"][0]{
+    ...,
+    "id": _id,
+    following[]->{username, avatarimg},
+    followers[]->{username, avatarimg},
+    "bookmarks":bookmarks[]->_id
+  }`);
+}

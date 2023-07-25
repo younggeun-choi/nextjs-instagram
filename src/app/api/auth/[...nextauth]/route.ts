@@ -13,7 +13,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user: { id, name, email, image } }) {
-      console.log("signIn", id);
       if (!email) {
         return false;
       }

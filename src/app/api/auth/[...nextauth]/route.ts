@@ -20,17 +20,19 @@ export const authOptions: NextAuthOptions = {
         id,
         name: name || "",
         email,
-        image,
+        avatarimg: image || "",
         username: email.split("@")[0],
       });
       return true;
     },
     async session({ session }) {
       const user = session?.user;
+      console.log("CALLBACK - session::", user);
       if (user) {
         session.user = {
           ...user,
           username: user.email?.split("@")[0] || "",
+          avatarimg: user.image || "",
         };
       }
       return session;

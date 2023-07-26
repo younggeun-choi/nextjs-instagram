@@ -1,12 +1,14 @@
+type AvartarSize = "sm" | "md" | "lg";
+
 type Props = {
   image?: string | null;
-  size?: "sm" | "md";
+  size?: AvartarSize;
   highlight?: boolean;
 };
 
 export default function Avartar({
   image,
-  size = "md",
+  size = "lg",
   highlight = false,
 }: Props) {
   return (
@@ -24,17 +26,33 @@ export default function Avartar({
   );
 }
 
-function getContainerStyle(size: string, highlight: boolean): string {
+function getContainerStyle(size: AvartarSize, highlight: boolean): string {
   const baseStyle = "rounded-full flex justify-center items-center";
   const highlightStyle = highlight
     ? "bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300"
     : "";
-  const sizeStyle = size === "sm" ? "w-9 h-9" : "w-[68px] h-[68px]";
+  const sizeStyle = getContainerSize(size);
   return `${baseStyle} ${highlightStyle} ${sizeStyle}`;
 }
 
-function getImageSizeStyle(size: string): string {
-  return size === "sm"
-    ? "w-[34px] h-[34px] p-[0.1rem] "
-    : "w-16 h-16 p-[0.2rem]";
+function getContainerSize(size: AvartarSize): string {
+  switch (size) {
+    case "sm":
+      return "w-9 h-9";
+    case "md":
+      return "w-11 h-11";
+    case "lg":
+      return "w-[68px] h-[68px]";
+  }
+}
+
+function getImageSizeStyle(size: AvartarSize): string {
+  switch (size) {
+    case "sm":
+      return "w-[34px] h-[34px] p-[0.1rem] ";
+    case "md":
+      return "w-[42px] h-[42px] p-[0.2rem] ";
+    case "lg":
+      return "w-16 h-16 p-[0.2rem]";
+  }
 }

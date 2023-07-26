@@ -4,7 +4,7 @@ import { SimplePost } from "@/model/post";
 const simplePostProjection = `
     ...,
     "username": author->username,
-    "userImage": author->avatarimg,
+    "avatarimg": author->avatarimg,
     "image": photo,
     "likes": likes[]->username,
     "text": comments[0].comment,

@@ -36,7 +36,6 @@ export default function Navbar() {
   const pathName = usePathname();
   const { data: session } = useSession();
   const user = session?.user;
-  console.log("NavBar - session::", user);
 
   return (
     <div className="flex justify-between items-center m-6">

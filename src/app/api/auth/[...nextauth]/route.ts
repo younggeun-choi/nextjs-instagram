@@ -27,7 +27,6 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session }) {
       const user = session?.user;
-      console.log("CALLBACK - session::", user);
       if (user) {
         session.user = {
           ...user,

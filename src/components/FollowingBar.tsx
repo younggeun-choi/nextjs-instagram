@@ -22,7 +22,7 @@ export default function FollowingBar() {
   // 3. 백엔드에서 사용자의 상세 정보를 Sanity에서 가지고 옴 (followings)
   // 4. Sanity에서 가지고 온 followings 정보를 이용해서 클라이언트 컴포넌트에서 UI에 보여줌 (image, username)
   return (
-    <section className="w-full flex justify-center items-center p-4 shadow-sm shadow-neutral-300 mb-4 rounded-lg min-h-[90px] overflow-x-auto">
+    <section className="w-full flex justify-center items-center p-4 shadow-sm shadow-neutral-300 mb-4 rounded-lg min-h-[90px] overflow-x-auto relative z-0">
       {loading ? (
         <PropagateLoader size={8} color="red" />
       ) : (

@@ -1,13 +1,14 @@
 "use client";
 
 import { SimplePost } from "@/model/post";
-import Avartar from "./Avartar";
 import Image from "next/image";
-import CommentForm from "./CommentForm";
-import ActionBar from "./ActionBar";
 import { useState } from "react";
-import ModalPortal from "./ui/ModalPortal";
+import ActionBar from "./ActionBar";
+import CommentForm from "./CommentForm";
+import PostDetail from "./PostDetail";
 import PostModal from "./PostModal";
+import PostUserAvartar from "./PostUserAvartar";
+import ModalPortal from "./ui/ModalPortal";
 
 type Props = {
   post: SimplePost;
@@ -20,10 +21,7 @@ export default function PostListCard({ post, priority = false }: Props) {
 
   return (
     <article className="rounded-lg shadow-md border border-gray-200">
-      <div className="flex items-center p-2">
-        <Avartar image={avatarimg} size="md" highlight />
-        <span className="text-gray-900 font-bold ml-2">{username}</span>
-      </div>
+      <PostUserAvartar avatarimg={avatarimg} username={username} />
       <Image
         className="w-full object-cover aspect-square"
         src={image}
@@ -43,7 +41,7 @@ export default function PostListCard({ post, priority = false }: Props) {
       {openModal && (
         <ModalPortal>
           <PostModal onClose={() => setOpenModal(false)}>
-            <p>포스트 상세 페이지</p>
+            <PostDetail post={post} />
           </PostModal>
         </ModalPortal>
       )}

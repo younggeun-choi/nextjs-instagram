@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import { client, urlFor } from "./sanity";
 import { SimplePost } from "@/model/post";
 const simplePostProjection = `
@@ -23,4 +22,21 @@ export async function getFollowingPostsOf(username: string) {
     .then((post) =>
       post.map((post: SimplePost) => ({ ...post, image: urlFor(post.image) }))
     );
+}
+
+export async function getPost(id: string) {
+  return client
+    .fetch(
+      `*[_type == "post" && _id == "${id}"][0] {
+      ...,
+      "username": author->username,
+      "avatarimg": author->avatarimg,
+      "image": photo,
+      "likes": likes[]->username,
+      comments[] {comment, "username": author->username, "avatarimg": author->avatarimg},
+      "id": _id,
+      "createdAt": _createdAt,
+    }`
+    )
+    .then((post) => ({ ...post, image: urlFor(post.image) }));
 }
